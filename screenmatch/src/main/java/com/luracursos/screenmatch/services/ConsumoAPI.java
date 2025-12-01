@@ -8,7 +8,9 @@ import java.net.http.HttpResponse;
 
 public class ConsumoAPI {
 
-    // Metodo
+    // Metodo   conexion a la api y ver datos en formato json
+
+
     public String obtenerDatos(String url){
 
             HttpClient client = HttpClient.newHttpClient();
