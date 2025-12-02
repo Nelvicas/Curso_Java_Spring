@@ -20,7 +20,7 @@ public class ScreenmatchApplication implements CommandLineRunner {
     @Override
     public void run(String... args) throws Exception {
         var consumoApi = new ConsumoAPI();
-        var json = consumoApi.obtenerDatos("https://www.omdbapi.com/?t=juego+de+tronos&apikey=87dbee7d");     //  consumo de primer api
+        var json = consumoApi.obtenerDatos("https://www.omdbapi.com/?t=game+of+thrones&apikey=87dbee7d");     //  consumo de primer api
         //var json = consumoApi.obtenerDatos("https://coffee.alexflipnote.dev/random.json");                     //  consumo de segunda api
 
         System.out.println(json);
@@ -40,6 +40,8 @@ public class ScreenmatchApplication implements CommandLineRunner {
 Un método set sirve para cambiar / asignar un valor a un atributo privado.
 Un método get sirve para obtener / leer el valor de un atributo privado.
 
+
+&Season=1&episode=1
  */
 
 //  en el archivo pom.xml se agrgan las librerias a ocupar en esta pagina se buscal las liberias https://mvnrepository.com/search?q=jackson
