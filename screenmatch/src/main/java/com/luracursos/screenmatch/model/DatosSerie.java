@@ -7,6 +7,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 @JsonIgnoreProperties(ignoreUnknown = true)
 public record DatosSerie(
 
+        // Solo traer datos en especifico de la serie
         // JsonAlias   =  solo permite leer
         @JsonAlias("Title") String titulo,
         @JsonAlias("totalSeasons") Integer totalDeTemporadas,
