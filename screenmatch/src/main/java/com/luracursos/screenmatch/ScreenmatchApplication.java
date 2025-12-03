@@ -4,6 +4,7 @@ package com.luracursos.screenmatch;
 import com.luracursos.screenmatch.model.DatosEpisodio;
 import com.luracursos.screenmatch.model.DatosSerie;
 import com.luracursos.screenmatch.model.DatosTemporadas;
+import com.luracursos.screenmatch.principal.Principal;
 import com.luracursos.screenmatch.services.ConsumoAPI;
 import com.luracursos.screenmatch.services.ConvierteDatos;
 import org.springframework.boot.CommandLineRunner;
@@ -24,6 +25,11 @@ public class ScreenmatchApplication implements CommandLineRunner {
 
     @Override
     public void run(String... args) throws Exception {
+
+        Principal principal = new Principal();
+        principal.muestraElMenu();
+
+        /*
         var consumoApi = new ConsumoAPI();
         var json = consumoApi.obtenerDatos("https://www.omdbapi.com/?t=game+of+thrones&apikey=87dbee7d");     //  consumo de primer api
         //var json = consumoApi.obtenerDatos("https://coffee.alexflipnote.dev/random.json");                     //  consumo de segunda api
@@ -50,7 +56,8 @@ public class ScreenmatchApplication implements CommandLineRunner {
             temporadas.add(datosTemporadas);
         }
 
-        temporadas.forEach(System.out::println);
+        temporadas.forEach(System.out::println);*/
+
     }
 }
 
