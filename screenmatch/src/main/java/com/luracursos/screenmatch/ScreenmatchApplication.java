@@ -4,6 +4,7 @@ package com.luracursos.screenmatch;
 import com.luracursos.screenmatch.model.DatosEpisodio;
 import com.luracursos.screenmatch.model.DatosSerie;
 import com.luracursos.screenmatch.model.DatosTemporadas;
+import com.luracursos.screenmatch.principal.EjemploStreams;
 import com.luracursos.screenmatch.principal.Principal;
 import com.luracursos.screenmatch.services.ConsumoAPI;
 import com.luracursos.screenmatch.services.ConvierteDatos;
@@ -26,8 +27,11 @@ public class ScreenmatchApplication implements CommandLineRunner {
     @Override
     public void run(String... args) throws Exception {
 
-        Principal principal = new Principal();
-        principal.muestraElMenu();
+        //Principal principal = new Principal();
+        //principal.muestraElMenu();
+
+        EjemploStreams ejemploStreams = new EjemploStreams();
+        ejemploStreams.muestrEjemplo();
 
         /*
         var consumoApi = new ConsumoAPI();
@@ -59,6 +63,8 @@ public class ScreenmatchApplication implements CommandLineRunner {
         temporadas.forEach(System.out::println);*/
 
     }
+
+
 }
 
 
