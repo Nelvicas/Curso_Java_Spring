@@ -7,8 +7,10 @@ import com.luracursos.screenmatch.services.ConsumoAPI;
 import com.luracursos.screenmatch.services.ConvierteDatos;
 
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.List;
 import java.util.Scanner;
+import java.util.stream.Collectors;
 
 public class Principal {
 
@@ -36,7 +38,7 @@ public class Principal {
             temporadas.add(datosTemporadas);
         }
 
-        temporadas.forEach(System.out::println);
+        //temporadas.forEach(System.out::println);
 
 
         // Mostrar solo el titulo de los episodios para las temporadas
@@ -52,6 +54,21 @@ public class Principal {
 
         // Funciones lamda
 
-        temporadas.forEach(t -> t.episodios().forEach(e -> System.out.println(e.titulo())));
+        //temporadas.forEach(t -> t.episodios().forEach(e -> System.out.println(e.titulo())));
+
+
+        ///   Convertir todas las informaciones a una lista del tipo DatosEpisodios
+
+        List<DatosEpisodio> datosEpisodios = temporadas.stream()
+                .flatMap(t -> t.episodios().stream())
+                .collect(Collectors.toList());
+
+        // Top 5 episodios
+        System.out.println("Top 5 episodios");
+        datosEpisodios.stream()
+                .filter(e -> !e.evaluacion().equalsIgnoreCase("N/A"))
+                .sorted(Comparator.comparing(DatosEpisodio::evaluacion).reversed())
+                .limit(5)
+                .forEach(System.out::println);
     }
 }
