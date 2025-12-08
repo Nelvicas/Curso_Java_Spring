@@ -9,10 +9,7 @@ import com.luracursos.screenmatch.services.ConvierteDatos;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
-import java.util.ArrayList;
-import java.util.Comparator;
-import java.util.List;
-import java.util.Scanner;
+import java.util.*;
 import java.util.stream.Collectors;
 
 public class Principal {
@@ -66,7 +63,8 @@ public class Principal {
                 .flatMap(t -> t.episodios().stream())
                 .collect(Collectors.toList());
 
-        // Top 5 episodios
+        /*
+        // Top 5 episodios  uso de filros
         System.out.println("Top 5 episodios");
         datosEpisodios.stream()
                 .filter(e -> !e.evaluacion().equalsIgnoreCase("N/A"))
@@ -79,12 +77,7 @@ public class Principal {
                 .forEach(System.out::println);
 
 
-
-
-
-
-
-
+         */
 
         ///  Convirtiendo los datos a una lista de tipo episodio
         List<Episodio> episodios = temporadas.stream()
@@ -117,5 +110,20 @@ public class Principal {
 
 
          */
+
+
+        //  busca epsodios por un pedazo de titulos
+
+        System.out.println("Escriba el titulo del episodio que desea ver:");
+        var pedazoTitulo = teclado.nextLine();
+        Optional<Episodio> episodioBuscado = episodios.stream()
+                .filter(e -> e.getTitulo().toUpperCase().contains(pedazoTitulo.toUpperCase()))
+                .findFirst();
+        if(episodioBuscado.isPresent()){
+            System.out.println("Episodio encontrado");
+            System.out.println("Los datos son: " + episodioBuscado.get());
+        }else {
+            System.out.println("Episodio no encontrado");
+        }
     }
 }
