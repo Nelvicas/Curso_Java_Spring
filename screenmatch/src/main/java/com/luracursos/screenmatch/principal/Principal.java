@@ -70,9 +70,21 @@ public class Principal {
         System.out.println("Top 5 episodios");
         datosEpisodios.stream()
                 .filter(e -> !e.evaluacion().equalsIgnoreCase("N/A"))
+                .peek(e -> System.out.println("Primer filtro N/A " + e))
                 .sorted(Comparator.comparing(DatosEpisodio::evaluacion).reversed())
+                .peek(e -> System.out.println("Segundo filtro ordenacion (M>m)" + e))
+                .map(e -> e.titulo().toUpperCase())
+                .peek(e -> System.out.println("Tercer filtro Mayusculas (m>M)" + e))
                 .limit(5)
                 .forEach(System.out::println);
+
+
+
+
+
+
+
+
 
         ///  Convirtiendo los datos a una lista de tipo episodio
         List<Episodio> episodios = temporadas.stream()
@@ -80,7 +92,7 @@ public class Principal {
                         .map(d -> new Episodio(t.numero(),d)))
                 .collect(Collectors.toList());
 
-        episodios.forEach(System.out::println);
+        //episodios.forEach(System.out::println);
 
 
         /// / Busqueda de episodios a partir de x año
@@ -92,6 +104,8 @@ public class Principal {
         LocalDate fechaBusqueda = LocalDate.of(fecha, 1,1);
 
 
+        /*
+        // fecha de busqueda
         DateTimeFormatter dtf = DateTimeFormatter.ofPattern("dd/MM/yyyy");
         episodios.stream()
                 .filter(e -> e.getFechaDeLanzamiento() != null && e.getFechaDeLanzamiento().isAfter(fechaBusqueda))
@@ -101,5 +115,7 @@ public class Principal {
                                 "Fecha de Lanzamiento " + e.getFechaDeLanzamiento().format(dtf)
                 ));
 
+
+         */
     }
 }
