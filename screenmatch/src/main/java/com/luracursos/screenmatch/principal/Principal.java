@@ -112,6 +112,7 @@ public class Principal {
          */
 
 
+        /*
         //  busca epsodios por un pedazo de titulos
 
         System.out.println("Escriba el titulo del episodio que desea ver:");
@@ -125,5 +126,25 @@ public class Principal {
         }else {
             System.out.println("Episodio no encontrado");
         }
+
+         */
+
+
+        //  Uso de map
+
+        Map<Integer, Double>evaluacionesPorTemporadas = episodios.stream()
+                .filter(e -> e.getEvaluacion() > 0.0)
+                .collect(Collectors.groupingBy(Episodio::getTemporada,
+                        Collectors.averagingDouble(Episodio::getEvaluacion)));
+        System.out.println(evaluacionesPorTemporadas);
+
+        DoubleSummaryStatistics est = episodios.stream()
+                .filter(e -> e.getEvaluacion() > 0.0)
+                .collect(Collectors.summarizingDouble(Episodio::getEvaluacion));
+
+        System.out.println("Media de las evaluaciones: " + est.getAverage());
+        System.out.println("Episodio mejor evaluado: " + est.getMax());
+        System.out.println("Episodio peor evaluado: " + est.getMin());
     }
+
 }
