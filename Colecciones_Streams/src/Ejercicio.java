@@ -1,5 +1,4 @@
-import java.util.ArrayList;
-import java.util.List;
+import java.util.*;
 
 public class Ejercicio {
     public static void main(String[] args) {
@@ -41,6 +40,52 @@ public class Ejercicio {
 
         System.out.println("La segunda persona de la lista es: "+ empleados2.get(1));
         System.out.println("Total de empleados: " + empleados2.toArray().length);
+
+
+
+        ///   Estructura que no nos permita repetir valos   Set
+        System.out.println("///////  Estructura Set para no repetir valores   /////");
+        Set<String> eventos = new HashSet<>();
+        eventos.add("IA Conference");
+        eventos.add("AI Summit");
+        eventos.add("DevFest");
+        eventos.add("Cloud Expo");
+        eventos.add("IA Conference");
+        eventos.add("DevFest");
+
+        System.out.println(eventos);
+
+
+
+        ///   Estructura que no nos  ayude a almacenar con clave-valor  Map
+        System.out.println("///////  Estructura Map clave-valor   /////");
+
+        Map<Integer, String> trabajadores = new HashMap<>();
+        trabajadores.put(1, "Teresa");
+        trabajadores.put(2, "Ivan");
+        trabajadores.put(3, "Juan");
+        System.out.println(trabajadores.get(2));
+
+
+
+        ///   Estructura Map
+        System.out.println("///////  Estructura Map   /////");
+        Map<Integer, String> clientes = new HashMap<>();
+        clientes.put(1, "María");
+        clientes.put(2, "Marcos");
+        clientes.put(3, "Ana");
+        clientes.put(4, "Juana");
+        clientes.put(5, "Karen");
+
+        int idCliente = 3;
+
+        if (clientes.containsKey(idCliente)) {
+            String nombreCliente = clientes.get(idCliente);
+            System.out.println("El nombre del cliente con ID " + idCliente + " es: " + nombreCliente);
+        } else {
+            System.out.println("Cliente con ID " + idCliente + " no encontrado.");
+        }
+
 
     }
 }
