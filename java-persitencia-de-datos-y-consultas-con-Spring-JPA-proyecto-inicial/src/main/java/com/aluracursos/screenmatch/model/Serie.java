@@ -3,6 +3,7 @@ package com.aluracursos.screenmatch.model;
 import com.aluracursos.screenmatch.service.ConsultaChatGpt;
 import jakarta.persistence.*;
 
+import java.util.List;
 import java.util.OptionalDouble;
 
 
@@ -26,8 +27,14 @@ public class Serie {
     private Categoria genero;
     private String actores;
     private String sinopsis;
+    @Transient
+    private List<Episodio> episodios;
 
     //   Consructor
+
+    public Serie(){
+
+    }
 
     public Serie(DatosSerie datosSerie){
         this.titulo = datosSerie.titulo();
