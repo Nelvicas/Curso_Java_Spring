@@ -27,7 +27,8 @@ public class Serie {
     private Categoria genero;
     private String actores;
     private String sinopsis;
-    @Transient
+    // @Transient
+    @OneToMany(mappedBy = "serie", cascade = CascadeType.ALL)
     private List<Episodio> episodios;
 
     //   Consructor
@@ -104,7 +105,7 @@ public class Serie {
     }
 
     public void setSinopsis(String sinopsis) {
-        this.sinopsis = sinopsis;
+
     }
 
 
@@ -127,4 +128,8 @@ public class Serie {
                 ", sinopsis='" + sinopsis + '\'';
     }
 
+
+    public void setEpisodio(List<Episodio> episodios) {
+        this.episodios = episodios;       ///  se agrego este metodo para solucioanar el error del dia 24/12
+    }
 }
