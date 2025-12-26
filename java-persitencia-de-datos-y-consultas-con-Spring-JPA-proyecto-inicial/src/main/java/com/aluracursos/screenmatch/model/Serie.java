@@ -28,7 +28,7 @@ public class Serie {
     private String actores;
     private String sinopsis;
     // @Transient
-    @OneToMany(mappedBy = "serie", cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "serie", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     private List<Episodio> episodios;
 
     //   Consructor
@@ -125,11 +125,17 @@ public class Serie {
                 ", evaluacion=" + evaluacion +
                 ", poster='" + poster + '\'' +
                 ", actores='" + actores + '\'' +
-                ", sinopsis='" + sinopsis + '\'';
+                ", sinopsis='" + sinopsis + '\'' +
+                ", episodios='" + episodios + '\'';
     }
 
 
+    public List<Episodio> getEpisodios(){
+        return episodios;
+    }
+
     public void setEpisodio(List<Episodio> episodios) {
+        episodios.forEach(e -> e.setSeries(this));
         this.episodios = episodios;       ///  se agrego este metodo para solucioanar el error del dia 24/12
     }
 }
