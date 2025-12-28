@@ -20,6 +20,13 @@ public interface SerieRepository extends JpaRepository<Serie,Long> {
 
     @Query(value = "SELECT s FROM Serie s WHERE s.totalTemporadas <= :totalTemporadas AND s.evaluacion >= :evaluacion")
         List<Serie> seriesPorTemporadayEvaluacion(int totalTemporadas, Double evaluacion);
+
+
+    @Query("SELECT s FROM Series s " + "JOIN s.episodios e " + "GROUP BY s " + "ORDER BY MAX(e.fechaDeLanzamiento) DESC LIMIT 5")
+    List<Serie> LanzamientsMasRecientes();
+
+
+
     /*
 
 // Exemplo de Query JPQL
@@ -43,6 +50,8 @@ Para utilizarlas en el repositorio, debemos usar el atributo nativeQuery de la a
 
     @Query("SELECT e FROM Serie s JOIN s.episodios e WHERE s = :serie ORDER BY e.evaluacion DESC LIMIT 5")
     List<Episodio> top5Episodios(Serie serie);
+
+
 }
 
 
