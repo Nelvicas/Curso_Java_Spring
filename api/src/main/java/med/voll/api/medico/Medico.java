@@ -7,12 +7,14 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import med.voll.api.direccion.Direccion;
 
+
+@Table(name = "medicos")
+@Entity(name = "Medico")
 @Getter
 @NoArgsConstructor
 @AllArgsConstructor
 @EqualsAndHashCode(of = "id")
-@Table(name = "medicos")
-@Entity(name = "Medico")
+
 
 
 // Entidad JPA
@@ -23,6 +25,7 @@ public class Medico {
     private Long id;
     private String nombre;
     private String email;
+    private String telefono;
     private String documento;
 
     @Enumerated(EnumType.STRING)
@@ -35,6 +38,7 @@ public class Medico {
         this.id = null;
         this.nombre = datos.nombre();
         this.email = datos.email();
+        this.telefono = datos.telefono();
         this.documento = datos.documento();
         this.especialidad = datos.especialidad();
         this.direccion = new Direccion(datos.direccion());
