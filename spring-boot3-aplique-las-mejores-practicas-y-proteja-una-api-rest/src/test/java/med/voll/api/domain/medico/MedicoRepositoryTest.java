@@ -2,6 +2,8 @@ package med.voll.api.domain.medico;
 
 import jakarta.persistence.EntityManager;
 import med.voll.api.domain.consulta.Consulta;
+import med.voll.api.domain.direccion.DatosDireccion;
+import med.voll.api.domain.paciente.DatosRegistroPaciente;
 import med.voll.api.domain.paciente.Paciente;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -37,9 +39,9 @@ class MedicoRepositoryTest {
         var lunesSiguienteALas10 = LocalDate.now().with(TemporalAdjusters.next(DayOfWeek.MONDAY)).atTime(10,0);
 
 
-        var medico =
-              var paciente =
-                var consulta =
+                var medico = registrarMedico("Medico1","medico@gmail.com", "12345", Especialidad.CARDIOLOGIA);
+                var paciente = registrarPaciente("Paciente1", "paciente@gmail.com", "123789");
+                registrarConsulta(medico,paciente, lunesSiguienteALas10);
 
 
         var medicoLibre = medicoRepository.elegirMedicoAleatorioDisponibleEnLaFecha(Especialidad.CARDIOLOGIA, lunesSiguienteALas10);
@@ -47,7 +49,32 @@ class MedicoRepositoryTest {
     }
 
 
-    private void registrarConsulta(Medico medico, Paciente paciente LocalDateTime fecha){
+
+    @Test
+    @DisplayName("Deberia devolver medico cuando el medico buscado este  disponible en esa fecha")
+    void elegirMedicoAleatorioDisponibleEnLaFechaEsenario2() {
+        var lunesSiguienteALas10 = LocalDate.now().with(TemporalAdjusters.next(DayOfWeek.MONDAY)).atTime(10,0);
+
+
+        var medico = registrarMedico("Medico1","medico@gmail.com", "12345", Especialidad.CARDIOLOGIA);
+        var paciente = registrarPaciente("Paciente1", "paciente@gmail.com", "123789");
+        registrarConsulta(medico,paciente, lunesSiguienteALas10);
+
+
+        var medicoLibre = medicoRepository.elegirMedicoAleatorioDisponibleEnLaFecha(Especialidad.CARDIOLOGIA, lunesSiguienteALas10);
+        assertThat(medicoLibre).isNull();
+    }
+
+
+
+
+
+
+
+
+
+
+    private void registrarConsulta(Medico medico, Paciente paciente, LocalDateTime fecha){
         em.persist(new Consulta(null,medico,paciente,fecha));
     }
 
@@ -60,6 +87,40 @@ class MedicoRepositoryTest {
 
     private Paciente registrarPaciente(String nombre, String email, String documento){
         var paciente = new Paciente(datosPaciente(nombre, email, documento));
+        em.persist(paciente);
         return paciente;
+    }
+
+    private DatosRegistroMedico datosMedico(String nombre, String email, String documento, Especialidad especialidad){
+        return  new DatosRegistroMedico(
+                nombre,
+                email,
+                "6145489789",
+                documento,
+                especialidad,
+                datosDireccion()
+        );
+    }
+
+    private DatosRegistroPaciente datosPaciente(String nombre, String email, String documento){
+        return  new DatosRegistroPaciente(
+                nombre,
+                email,
+                "1234564",
+                documento,
+                datosDireccion()
+        );
+    }
+
+    private DatosDireccion datosDireccion(){
+        return new DatosDireccion(
+                "calle x",
+                "123",
+                "depto 1",
+                "Centro",
+                "CDMX",
+                "CDMX",
+                "06000"
+        );
     }
 }
